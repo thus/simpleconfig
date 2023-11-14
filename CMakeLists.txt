@@ -18,6 +18,7 @@ option(BUILD_FUZZERS "Build fuzzer applications" OFF)
 option(ENABLE_TESTS "Enable tests" OFF)
 option(ENABLE_COVERAGE "Enable coverage report" OFF)
 option(ENABLE_ASAN "Enable address sanitizer" OFF)
+option(ENABLE_UBSAN "Enable undefined behaviour sanitizer" OFF)
 option(ENABLE_CLANG_TIDY "Enable linter 'clang-tidy'" OFF)
 option(ENABLE_CPPCHECK "Enable linter 'cppcheck'" OFF)
 
@@ -35,6 +36,10 @@ add_custom_target(check DEPENDS ${all_linters})
 
 if(ENABLE_ASAN)
     enable_asan()
+endif()
+
+if(ENABLE_UBSAN)
+    enable_ubsan()
 endif()
 
 add_subdirectory(src)
