@@ -241,6 +241,12 @@ static int sconf_array_get_index_from_string(const char *str,
         return -1;
     }
 
+    if (num < 0) {
+        sconf_err_set(err, "array index can not be a negative number '%s'",
+                      --str);
+        return -1;
+    }
+
     *index = num;
 
     return 0;
