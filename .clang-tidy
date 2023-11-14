@@ -1,0 +1,4 @@
+---
+Checks: '-*,cert-*'
+WarningsAsErrors: true
+HeaderFilterRegex: ''

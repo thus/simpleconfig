@@ -1,0 +1,12 @@
+lol: rofl
+foo: "123"
+bar: '000000000'
+b1: >
+  testA
+  testB
+  testC
+b2: |
+  testD
+  testE
+  testF
+empty: ''
