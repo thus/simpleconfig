@@ -550,7 +550,12 @@ int sconf_yaml_read(struct SConfNode *root, const char *filename,
 end:
     sconf_yaml_state_destroy(&state);
     yaml_parser_delete(&parser);
-    fclose(fp);
+
+    if (fclose(fp) == EOF) {
+        sconf_err_set(err, "error closing file '%s': %s\n", filename,
+                      strerror(errno));
+        return_code = -1;
+    }
 
     return return_code;
 }
