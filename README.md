@@ -43,6 +43,27 @@ make test
 make coverage  # to get a coverage report
 ```
 
+## Fuzzing with AFL++
+
+Support for fuzzing with AFL++ is added to the project.
+
+After installing AFL++, fuzzers for sconf could be built in the following
+way:
+
+```
+AFL_HARDEN=1 CC=afl-clang-fast cmake .. -DENABLE_COVERAGE=ON -DENABLE_ASAN=ON -DBUILD_FUZZERS=ON
+make
+```
+
+It is wise to enable ASAN (as above) when fuzzing. Also remember to create
+a directory with input files (corpus) for the fuzzer.
+
+The fuzzers could then be executed with afl-fuzz like this:
+
+```
+ASAN_OPTIONS=verbosity=3,abort_on_error=1 afl-fuzz -m none -i in/ -o out/ fuzz/fuzz_sconf_yaml_read
+```
+
 ## Example
 
 See `examples/minimal.c` for an example showing off the basics of sconf.
