@@ -228,20 +228,16 @@ static int sconf_yaml_node_add(struct SConfYAMLState *state,
         return -1;
     }
 
-    void *data;
-    uint8_t type;
+    void *data = value_str;
+    uint8_t type = SCONF_TYPE_STR;
     int64_t integer;
     bool boolean;
     double fp;
     int r = 0;
 
     if (event->data.scalar.style == YAML_DOUBLE_QUOTED_SCALAR_STYLE ||
-            event->data.scalar.style == YAML_SINGLE_QUOTED_SCALAR_STYLE) {
-        data = value_str;
-        type = SCONF_TYPE_STR;
-    }
-    else if (strlen(value_str) == 0) {
-        /* Empty string */
+            event->data.scalar.style == YAML_SINGLE_QUOTED_SCALAR_STYLE ||
+            strlen(value_str) == 0) {
         data = value_str;
         type = SCONF_TYPE_STR;
     }
@@ -256,10 +252,6 @@ static int sconf_yaml_node_add(struct SConfYAMLState *state,
     else if ((r = sconf_string_to_bool(value_str, &boolean))) {
         data = &boolean;
         type = SCONF_TYPE_BOOL;
-    }
-    else {
-        data = value_str;
-        type = SCONF_TYPE_STR;
     }
 
     if (r == -1) {
