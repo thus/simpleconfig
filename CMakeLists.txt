@@ -32,7 +32,9 @@ if(SCONF_ENABLE_CPPCHECK)
     enable_check_cppcheck()
 endif()
 
-add_custom_target(check DEPENDS ${all_linters})
+if(all_linters)
+    add_custom_target(check DEPENDS ${all_linters})
+endif()
 
 if(SCONF_ENABLE_ASAN)
     enable_asan()
