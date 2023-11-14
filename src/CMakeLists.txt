@@ -1,6 +1,3 @@
-include_directories("${PROJECT_SOURCE_DIR}/include")
-include_directories("${PROJECT_SOURCE_DIR}/third_party")
-
 if (SCONF_ENABLE_COVERAGE)
     set(CMAKE_C_FLAGS "-O0 --coverage ${CMAKE_C_FLAGS}")
 endif()
@@ -20,6 +17,7 @@ set(sconf_compile_options -Wall -Wextra)
 
 if (SCONF_BUILD_SHARED)
     add_library(sconf SHARED ${sconf_source})
+    target_include_directories(sconf PUBLIC "${PROJECT_SOURCE_DIR}/include")
     target_compile_options(sconf PRIVATE ${sconf_compile_options})
     target_link_libraries(sconf art)
     target_link_libraries(sconf yaml)
@@ -28,6 +26,7 @@ endif()
 
 if (SCONF_BUILD_STATIC)
     add_library(sconf_static STATIC ${sconf_source})
+    target_include_directories(sconf_static PUBLIC "${PROJECT_SOURCE_DIR}/include")
     target_compile_options(sconf_static PRIVATE ${sconf_compile_options})
     set_target_properties(sconf_static PROPERTIES OUTPUT_NAME sconf)
     target_link_libraries(sconf_static art)

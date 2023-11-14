@@ -1,6 +1,3 @@
-include_directories("${PROJECT_SOURCE_DIR}/include")
-include_directories("${PROJECT_SOURCE_DIR}/third_party")
-
 find_library(CMOCKA_LIB cmocka)
 
 # Add tests to this list
