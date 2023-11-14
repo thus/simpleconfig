@@ -49,7 +49,7 @@ After installing AFL++, fuzzers for sconf could be built in the following
 way:
 
 ```
-AFL_HARDEN=1 CC=afl-clang-fast cmake .. -DENABLE_COVERAGE=ON -DENABLE_ASAN=ON -DBUILD_FUZZERS=ON
+AFL_HARDEN=1 CC=afl-clang-fast cmake .. -DSCONF_ENABLE_COVERAGE=ON -DSCONF_ENABLE_ASAN=ON -DSCONF_BUILD_FUZZERS=ON
 make
 ```
 
