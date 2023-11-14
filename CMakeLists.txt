@@ -22,6 +22,7 @@ add_subdirectory(third_party)
 if(ENABLE_LINTING)
     enable_check_clang_tidy()
     enable_check_cppcheck()
+    add_custom_target(check DEPENDS ${all_linters})
 endif()
 
 if(ENABLE_ASAN)
