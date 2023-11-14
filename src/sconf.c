@@ -205,11 +205,14 @@ const char *sconf_strerror(struct SConfErr *err)
  * @internal
  * @brief Get index of array from string.
  *
- * @param str String to get index from.
+ * @param str   String to get index from.
+ * @param index Pointer to index integer to set.
+ * @param err   Pointer to error struct.
  *
- * @return Index on success, -1 otherwise.
+ * @return 0 on success, -1 otherwise.
  */
 static int sconf_array_get_index_from_string(const char *str,
+                                             uint32_t *index,
                                              struct SConfErr *err)
 {
     assert(str);
@@ -225,7 +228,7 @@ static int sconf_array_get_index_from_string(const char *str,
     /* Skip start bracket */
     str++;
 
-    long index = strtol(str, &endptr, 10);
+    long num = strtol(str, &endptr, 10);
 
     if (errno != 0) {
         sconf_err_set(err, "could not get array index '%s': %s", --str,
@@ -238,7 +241,9 @@ static int sconf_array_get_index_from_string(const char *str,
         return -1;
     }
 
-    return index;
+    *index = num;
+
+    return 0;
 }
 
 /**
@@ -881,7 +886,7 @@ struct SConfNode *sconf_node_create(int type, void *data, struct SConfErr *err)
  */
 struct SConfNode *sconf_node_create_and_insert(const char *name, uint8_t type,
                                                struct SConfNode *parent,
-                                               int index, void *data,
+                                               uint32_t index, void *data,
                                                struct SConfErr *err)
 {
     assert(parent);
@@ -890,8 +895,8 @@ struct SConfNode *sconf_node_create_and_insert(const char *name, uint8_t type,
     struct SConfNode *node = NULL;
 
     if (name && name[0] == '[' && parent->type == SCONF_TYPE_ARRAY) {
-        index = sconf_array_get_index_from_string(name, err);
-        if (index == -1) {
+        r = sconf_array_get_index_from_string(name, &index, err);
+        if (r == -1) {
             return NULL;
         }
     }
@@ -999,7 +1004,7 @@ int sconf_get(struct SConfNode *root, const char *path, struct SConfNode **node,
     }
 
     struct SConfNode *parent = root;
-    int parent_index = 0;
+    uint32_t parent_index = 0;
 
     int r = 0;
     char *save_ptr = NULL;
@@ -1048,8 +1053,8 @@ int sconf_get(struct SConfNode *root, const char *path, struct SConfNode **node,
 
         if (parent->type == SCONF_TYPE_ARRAY && next[0] == '[') {
             /* Used for the next node when inserting into the array */
-            parent_index = sconf_array_get_index_from_string(next, err);
-            if (parent_index == -1) {
+            r = sconf_array_get_index_from_string(next, &parent_index, err);
+            if (r == -1) {
                 free(copy);
                 return -1;
             }

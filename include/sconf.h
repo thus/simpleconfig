@@ -495,7 +495,7 @@ int sconf_node_array_foreach(struct SConfNode *array,
  */
 struct SConfNode *sconf_node_create_and_insert(const char *name, uint8_t type,
                                                struct SConfNode *parent,
-                                               int index, void *data,
+                                               uint32_t index, void *data,
                                                struct SConfErr *err);
 
 /**
