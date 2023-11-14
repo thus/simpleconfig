@@ -9,7 +9,7 @@ project(
 
 set(CMAKE_C_STANDARD 17)
 
-include("${PROJECT_SOURCE_DIR}/cmake/macros.cmake")
+include("${sconf_SOURCE_DIR}/cmake/macros.cmake")
 
 option(SCONF_BUILD_SHARED "Build shared library" ON)
 option(SCONF_BUILD_STATIC "Build static library" ON)
