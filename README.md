@@ -32,8 +32,6 @@ make
 make install
 ```
 
-Both the tests and examples are built by default.
-
 ## Testing
 
 The unit tests can be executed by running:
