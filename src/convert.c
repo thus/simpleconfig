@@ -94,27 +94,16 @@ int sconf_string_to_float(const char *string, double *fp, struct SConfErr *err)
  */
 int sconf_string_to_bool(const char *string, bool *boolean)
 {
-    if (strncmp(string, "true", 4) == 0) {
+    if ((strncmp(string, "true", 4) == 0) ||
+            (strncmp(string, "yes", 3) == 0) ||
+            (strncmp(string, "on", 2) == 0)) {
         *boolean = true;
         return 1;
     }
-    else if (strncmp(string, "false", 5) == 0) {
-        *boolean = false;
-        return 1;
-    }
-    else if (strncmp(string, "yes", 3) == 0) {
-        *boolean = true;
-        return 1;
-    }
-    else if (strncmp(string, "no", 2) == 0) {
-        *boolean = false;
-        return 1;
-    }
-    else if (strncmp(string, "on", 2) == 0) {
-        *boolean = true;
-        return 1;
-    }
-    else if (strncmp(string, "off", 3) == 0) {
+
+    if ((strncmp(string, "false", 5) == 0) ||
+            (strncmp(string, "no", 2) == 0) ||
+            (strncmp(string, "off", 3) == 0)) {
         *boolean = false;
         return 1;
     }
