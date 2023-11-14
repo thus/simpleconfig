@@ -1,12 +1,11 @@
 # Makes it possible to run 'make coverage'
 macro(enable_coverage)
     if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
-        set(GCOV_TOOL --gcov-tool ${PROJECT_SOURCE_DIR}/tools/llvm-gcov.sh)
+        set(gcov_tool --gcov-tool ${PROJECT_SOURCE_DIR}/tools/llvm-gcov.sh)
     endif()
 
-    set(LCOV_CMD lcov -c -d ./src -o cov.info ${GCOV_TOOL})
-    set(GENHTML_CMD genhtml cov.info -o coverage)
-    set(PRINT_LINK_CMD echo LINK: file://`pwd`/coverage/index.html)
-
-    add_custom_target(coverage COMMAND ${LCOV_CMD} && ${GENHTML_CMD} && ${PRINT_LINK_CMD})
+    set(lcov_cmd lcov -c -d ./src -o cov.info ${gcov_tool})
+    set(genhtml_cmd genhtml cov.info -o coverage)
+    set(print_link_cmd echo LINK: file://`pwd`/coverage/index.html)
+    add_custom_target(coverage COMMAND ${lcov_cmd} && ${genhtml_cmd} && ${print_link_cmd})
 endmacro(enable_coverage)#
