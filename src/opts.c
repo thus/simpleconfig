@@ -403,11 +403,11 @@ static int sconf_opts_handle_option_yaml_file(struct SConfNode *root,
  *
  * @return padding needed.
  */
-static int sconf_opts_usage_string_calculate_padding(const struct SConfMap *map)
+static uint8_t sconf_opts_usage_string_calculate_padding(const struct SConfMap *map)
 {
     assert (map);
 
-    int padding = 0;
+    uint8_t padding = 0;
 
     for (const struct SConfMap *entry = map; entry->type; entry++)
     {
@@ -415,7 +415,7 @@ static int sconf_opts_usage_string_calculate_padding(const struct SConfMap *map)
             continue;
         }
 
-        int len = 0;
+        size_t len = 0;
 
         if (entry->opts_long) {
             len += strlen(entry->opts_long);
@@ -426,6 +426,12 @@ static int sconf_opts_usage_string_calculate_padding(const struct SConfMap *map)
         }
         else {
             len += strlen(sconf_type_to_arg_type_str(entry->type));
+        }
+
+        if (len > UINT8_MAX) {
+            /* Something went really wrong, so it does not really matter
+               how much padding we add. */
+            return 4;
         }
 
         if (len > padding) {
@@ -473,7 +479,7 @@ static int sconf_opts_usage_string_add_header(char *string, const char *prog,
  */
 static int sconf_opts_usage_string_add_option(char *string, int size,
                                               const struct SConfMap *curr,
-                                              int padding)
+                                              uint8_t padding)
 {
     assert(string);
     assert(curr);
@@ -567,7 +573,7 @@ static int sconf_opts_usage_string_generate(const char *prog,
         return -1;
     }
 
-    int padding = sconf_opts_usage_string_calculate_padding(map);
+    size_t padding = sconf_opts_usage_string_calculate_padding(map);
 
     for (const struct SConfMap *entry = map; entry->type; entry++)
     {
