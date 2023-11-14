@@ -47,7 +47,15 @@ static int sconf_short_opts_index_create(const struct SConfMap *map,
             continue;
         }
 
-        if (index[entry->opts_short]) {
+        if (entry->opts_short < 0) {
+            sconf_err_set(err, "short option '%s' is a negative number",
+                          entry->opts_short);
+            return -1;
+        }
+
+        unsigned char opt_index = entry->opts_short;
+
+        if (index[opt_index]) {
             sconf_err_set(err, "short option '%c' is used more than once",
                           entry->opts_short);
             return -1;
@@ -60,7 +68,7 @@ static int sconf_short_opts_index_create(const struct SConfMap *map,
             return -1;
         }
 
-        index[entry->opts_short] = entry;
+        index[opt_index] = entry;
     }
 
     return 0;

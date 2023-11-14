@@ -96,7 +96,7 @@ struct SConfMap {
     char *opts_long;
 
     /* Short option used for command-line options (e.g 'l') */
-    unsigned char opts_short;
+    char opts_short;
 
     /* Help string used when generating usage string (e.g "log directory") */
     char *help;
