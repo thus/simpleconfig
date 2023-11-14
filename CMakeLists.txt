@@ -15,15 +15,20 @@ option(BUILD_EXAMPLES "Build examples" OFF)
 option(ENABLE_TESTS "Enable tests" OFF)
 option(ENABLE_COVERAGE "Enable coverage report" OFF)
 option(ENABLE_ASAN "Enable address sanitizer" OFF)
-option(ENABLE_LINTING "Enable linting" ON)
+option(ENABLE_CLANG_TIDY "Enable linter 'clang-tidy'" OFF)
+option(ENABLE_CPPCHECK "Enable linter 'cppcheck'" OFF)
 
 add_subdirectory(third_party)
 
-if(ENABLE_LINTING)
+if(ENABLE_CLANG_TIDY)
     enable_check_clang_tidy()
-    enable_check_cppcheck()
-    add_custom_target(check DEPENDS ${all_linters})
 endif()
+
+if(ENABLE_CPPCHECK)
+    enable_check_cppcheck()
+endif()
+
+add_custom_target(check DEPENDS ${all_linters})
 
 if(ENABLE_ASAN)
     enable_asan()
