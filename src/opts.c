@@ -11,11 +11,11 @@
 
 /* Size of array containing long options. All long options is linked up
    with short options, which limits the size of available options. */
-#define SCONF_OPTS_LONG_OPTS_SIZE CHAR_MAX + 1
+#define SCONF_OPTS_LONG_OPTS_SIZE (CHAR_MAX + 1)
 
 /* Size of options index. All long options is linked up with short
    options, which limits the size of available options. */
-#define SCONF_OPTS_INDEX_SIZE CHAR_MAX + 1
+#define SCONF_OPTS_INDEX_SIZE (CHAR_MAX + 1)
 
 /* Size of optstring containing all possible short options and arguments,
    optional and not. */
