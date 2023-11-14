@@ -362,6 +362,7 @@ static int sconf_yaml_consume_event(struct SConfNode *root, yaml_event_t *event,
                         sconf_err_set(err, "key is already set to '%s'",
                                       state->curr_key);
                         free(state->curr_key);
+                        state->curr_key = NULL;
                         return 0;
                     }
                     state->curr_key = strdup((char *)event->data.scalar.value);
