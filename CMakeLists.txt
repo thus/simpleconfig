@@ -15,8 +15,13 @@ option(BUILD_EXAMPLES "Build examples" OFF)
 option(ENABLE_TESTS "Enable tests" OFF)
 option(ENABLE_COVERAGE "Enable coverage report" OFF)
 option(ENABLE_ASAN "Enable address sanitizer" OFF)
+option(ENABLE_LINTING "Enable linting" ON)
 
 add_subdirectory(third_party)
+
+if(ENABLE_LINTING)
+    enable_check_clang_tidy()
+endif()
 
 if(ENABLE_ASAN)
     enable_asan()
