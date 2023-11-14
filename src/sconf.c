@@ -57,9 +57,8 @@ const char *sconf_type_to_str(uint8_t type)
     if (type < SCONF_TYPE_MAX) {
         return sconf_types[type];
     }
-    else {
-        return sconf_types[SCONF_TYPE_MAX];
-    }
+
+    return sconf_types[SCONF_TYPE_MAX];
 }
 
 /**
@@ -74,9 +73,8 @@ const char *sconf_type_to_arg_type_str(uint8_t type)
     if (type < SCONF_TYPE_MAX) {
         return sconf_arg_types[type];
     }
-    else {
-        return sconf_arg_types[SCONF_TYPE_MAX];
-    }
+
+    return sconf_arg_types[SCONF_TYPE_MAX];
 }
 
 /**
@@ -943,9 +941,8 @@ struct SConfNode *sconf_node_create_and_insert(const char *name, uint8_t type,
         if (r == -1) {
             return NULL;
         }
-        else {
-            return node;
-        }
+
+        return node;
     }
 
     /* Node does not exist, so create it */

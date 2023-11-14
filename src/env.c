@@ -57,7 +57,7 @@ static int sconf_env_set_int(struct SConfNode *root, const char *path,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         sconf_err_set(err, "expected integer for environment variable %s",
                       env);
         return -1;
@@ -97,7 +97,7 @@ static int sconf_env_set_float(struct SConfNode *root, const char *path,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         sconf_err_set(err, "expected floating-point number for environment "
                       "variable %s", env);
         return -1;

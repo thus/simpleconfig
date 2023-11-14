@@ -28,7 +28,7 @@ static int sconf_defaults_handle_str(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 1) {
+    if (r == 1) {
         /* String is already set */
         return 0;
     }
@@ -64,7 +64,7 @@ static int sconf_defaults_handle_int(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 1) {
+    if (r == 1) {
         /* A node with this path already exists */
         return 0;
     }
@@ -74,7 +74,7 @@ static int sconf_defaults_handle_int(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         sconf_err_set(err, "expected default value for '%s' to be integer",
                       curr->path);
         return -1;
@@ -111,7 +111,7 @@ static int sconf_defaults_handle_float(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 1) {
+    if (r == 1) {
         /* A node with this path already exists */
         return 0;
     }
@@ -121,7 +121,7 @@ static int sconf_defaults_handle_float(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         sconf_err_set(err, "expected default value for '%s' to be "
                       "floating-point number", curr->path);
         return -1;
@@ -158,7 +158,7 @@ static int sconf_defaults_handle_bool(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 1) {
+    if (r == 1) {
         /* A node with this path already exists */
         return 0;
     }
@@ -168,7 +168,7 @@ static int sconf_defaults_handle_bool(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         sconf_err_set(err, "expected default value for '%s' to be boolean",
                       curr->path);
         return -1;
@@ -205,7 +205,7 @@ static int sconf_defaults_handle_yaml_file(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 1) {
+    if (r == 1) {
         /* YAML file path is already set */
         return 0;
     }

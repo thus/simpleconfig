@@ -34,7 +34,7 @@ static int sconf_validate_check_required(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         sconf_err_set(err, "required config path '%s' does not exist",
                       curr->path);
         return -1;

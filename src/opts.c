@@ -249,7 +249,7 @@ static int sconf_opts_handle_option_int(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         if (entry->opts_long) {
             sconf_err_set(err, "expected integer for option --%s/-%c",
                           entry->opts_long, entry->opts_short);
@@ -294,7 +294,7 @@ static int sconf_opts_handle_option_float(struct SConfNode *root,
     if (r == -1) {
         return -1;
     }
-    else if (r == 0) {
+    if (r == 0) {
         if (entry->opts_long) {
             sconf_err_set(err, "expected floating-point number for option "
                           "--%s/-%c", entry->opts_long, entry->opts_short);
@@ -761,7 +761,8 @@ int sconf_opts_parse(struct SConfNode *root, const struct SConfMap *map,
             sconf_err_set(err, "option '%c' requires an argument", optopt);
             return -1;
         }
-        else if (c == '?') {
+
+        if (c == '?') {
             if (optopt == 0) {
                 /* Unsupported long option */
                 sconf_err_set(err, "unsupported option '%s' specified",
