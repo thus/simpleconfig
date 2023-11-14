@@ -169,6 +169,17 @@ static void test_sconf_set_string_reach_max_depth(void **unused)
     sconf_node_destroy(root);
 }
 
+static void test_sconf_set_string_crash_from_fuzzer(void **unused)
+{
+    struct SConfNode *root = sconf_node_create(SCONF_TYPE_DICT, NULL, NULL);
+    assert_non_null(root);
+
+    int r = sconf_set_str(root, "J13.3.[23].[-1]J[21]213].[-213].", "crash", NULL);
+    assert_int_equal(r, -1);
+
+    sconf_node_destroy(root);
+}
+
 int main(void)
 {
     const struct CMUnitTest tests[] = {
@@ -182,6 +193,7 @@ int main(void)
         cmocka_unit_test(test_sconf_set_string_without_string),
         cmocka_unit_test(test_sconf_set_string_overwrite_existing),
         cmocka_unit_test(test_sconf_set_string_reach_max_depth),
+        cmocka_unit_test(test_sconf_set_string_crash_from_fuzzer),
     };
 
     return cmocka_run_group_tests(tests, NULL, NULL);
