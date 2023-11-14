@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
 
 project(
   sconf
@@ -6,6 +6,8 @@ project(
   VERSION 0.2
   LANGUAGES C
 )
+
+set(CMAKE_C_STANDARD 17)
 
 include("${PROJECT_SOURCE_DIR}/cmake/macros.cmake")
 
