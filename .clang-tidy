@@ -1,4 +1,4 @@
 ---
-Checks: '-*,cert-*'
+Checks: '-*,cert-*,bugprone-*,modernize-*,performance-*,llvm-*,-llvmlibc-restrict-system-libc-headers'
 WarningsAsErrors: true
 HeaderFilterRegex: ''
