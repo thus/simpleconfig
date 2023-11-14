@@ -111,7 +111,7 @@ static int sconf_opts_create_long_opts(const struct SConfMap *map,
         }
 
         long_opts[i].name = entry->opts_long;
-        long_opts[i].val = entry->opts_short;
+        long_opts[i].val = (unsigned char)entry->opts_short;
 
         switch (entry->type)
         {
