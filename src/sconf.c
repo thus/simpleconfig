@@ -279,8 +279,8 @@ int sconf_node_dict_insert(const char *name, struct SConfNode *parent,
         return -1;
     }
 
-    if (art_insert(&parent->dictionary, (unsigned char *)name, strlen(name),
-                   node) != NULL) {
+    if (art_insert(&parent->dictionary, (unsigned char *)name,
+                   (int)strlen(name), node) != NULL) {
         sconf_err_set(err, "inserting node into dict failed");
         return -1;
     }
@@ -318,7 +318,7 @@ int sconf_node_dict_search(const char *name, struct SConfNode *parent,
 
     *node = (struct SConfNode *)art_search(&parent->dictionary,
                                            (unsigned char *)name,
-                                           strlen(name));
+                                           (int)strlen(name));
 
     return 0;
 }
