@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 
 project(
   simpleconfig
-  DESCRIPTION "A simpler approach to configuration handling for projects"
+  DESCRIPTION "A simpler approach to configuration handling in projects"
   VERSION 0.2
   LANGUAGES C
 )
