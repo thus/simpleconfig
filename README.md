@@ -6,7 +6,7 @@ project.
 
 ## Features
 
-Sconf supports the following:
+Simpleconfig supports the following:
 
 * Basic node types like string, integer, float and boolean.
 * Nested nodes using dictionaries and arrays.
@@ -19,7 +19,7 @@ Sconf supports the following:
 
 ## Requirements
 
-libyaml is needed to build sconf.
+libyaml is needed to build simpleconfig.
 
 ## Build
 
@@ -64,7 +64,7 @@ ASAN_OPTIONS=verbosity=3,abort_on_error=1 afl-fuzz -m none -i in/ -o out/ fuzz/f
 
 ## Example
 
-See `examples/minimal.c` for an example showing off the basics of sconf.
+See `examples/minimal.c` for an example showing off the basics of simpleconfig.
 
 ## API
 
