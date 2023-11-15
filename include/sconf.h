@@ -35,7 +35,7 @@ enum {
 };
 
 /**
- * Opaque pointer type to represent a config node (see src/sconf_private.h
+ * Opaque pointer type to represent a config node (see include/sconf_private.h
  * for the private struct).
  */
 struct SConfNode;
