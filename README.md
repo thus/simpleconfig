@@ -1,8 +1,8 @@
 # Simple config
 
-Add configuration handling (argument parsing, config files, environment
-variables, and so on) without having to add lots of boilerplate code to each
-project.
+Add configuration handling to a project (argument parsing, config files,
+environment variables, and so on) without having to add lots of
+boilerplate code.
 
 ## Features
 
@@ -23,7 +23,7 @@ libyaml is needed to build simpleconfig.
 
 ## Build
 
-Sconf is built like most other cmake projects:
+Simpleconfig is built like most other cmake projects:
 
 ```
 mkdir build && cd build
@@ -45,8 +45,8 @@ make coverage  # to get a coverage report
 
 Support for fuzzing with AFL++ is added to the project.
 
-After installing AFL++, fuzzers for sconf could be built in the following
-way:
+After installing AFL++, fuzzers for simpleconfig could be built in the
+following way:
 
 ```
 AFL_HARDEN=1 CC=afl-clang-fast cmake .. -DSCONF_ENABLE_COVERAGE=ON -DSCONF_ENABLE_ASAN=ON -DSCONF_BUILD_FUZZERS=ON
