@@ -1,7 +1,7 @@
 # Makes it possible to run 'make coverage'
 macro(enable_coverage)
     if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
-        set(gcov_tool --gcov-tool ${sconf_SOURCE_DIR}/tools/llvm-gcov.sh)
+        set(gcov_tool --gcov-tool ${simpleconfig_SOURCE_DIR}/tools/llvm-gcov.sh)
     endif()
 
     set(lcov_cmd lcov -c -d ./src -o cov.info ${gcov_tool})

@@ -2,7 +2,7 @@ if (SCONF_ENABLE_COVERAGE)
     set(CMAKE_C_FLAGS "-O0 --coverage ${CMAKE_C_FLAGS}")
 endif()
 
-set(sconf_source
+set(simpleconfig_source
     array.c
     convert.c
     defaults.c
@@ -16,22 +16,22 @@ set(sconf_source
 set(sconf_compile_options -Wall -Wextra)
 
 if (SCONF_BUILD_SHARED)
-    add_library(sconf SHARED ${sconf_source})
-    target_include_directories(sconf PUBLIC "${sconf_SOURCE_DIR}/include")
-    target_compile_options(sconf PRIVATE ${sconf_compile_options})
+    add_library(sconf SHARED ${simpleconfig_source})
+    target_include_directories(sconf PUBLIC "${simpleconfig_SOURCE_DIR}/include")
+    target_compile_options(sconf PRIVATE ${simpleconfig_compile_options})
     target_link_libraries(sconf art)
     target_link_libraries(sconf yaml)
     install(TARGETS sconf DESTINATION lib)
 endif()
 
 if (SCONF_BUILD_STATIC)
-    add_library(sconf_static STATIC ${sconf_source})
-    target_include_directories(sconf_static PUBLIC "${sconf_SOURCE_DIR}/include")
-    target_compile_options(sconf_static PRIVATE ${sconf_compile_options})
+    add_library(sconf_static STATIC ${simpleconfig_source})
+    target_include_directories(sconf_static PUBLIC "${simpleconfig_SOURCE_DIR}/include")
+    target_compile_options(sconf_static PRIVATE ${simpleconfig_compile_options})
     set_target_properties(sconf_static PROPERTIES OUTPUT_NAME sconf)
     target_link_libraries(sconf_static art)
     target_link_libraries(sconf_static yaml)
     install(TARGETS sconf_static DESTINATION lib)
 endif()
 
-install(FILES "${sconf_SOURCE_DIR}/include/sconf.h" DESTINATION include)
+install(FILES "${simpleconfig_SOURCE_DIR}/include/sconf.h" DESTINATION include)

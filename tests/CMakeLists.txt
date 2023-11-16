@@ -27,6 +27,6 @@ foreach(X IN LISTS SCONF_TESTS)
     target_compile_options(${X} PRIVATE -Wall)
     target_link_libraries(${X} sconf ${CMOCKA_LIB})
     add_test(NAME ${X} COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${X}
-             WORKING_DIRECTORY ${sconf_SOURCE_DIR}/tests
+             WORKING_DIRECTORY ${simpleconfig_SOURCE_DIR}/tests
     )
 endforeach()
