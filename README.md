@@ -32,6 +32,14 @@ make
 make install
 ```
 
+## Example
+
+See `examples/minimal.c` for an example showing off the basics of simpleconfig.
+
+## API
+
+Check out the header file (`include/sconf.h`).
+
 ## Testing
 
 The unit tests can be executed by running:
@@ -61,11 +69,3 @@ The fuzzers could then be executed with afl-fuzz like this:
 ```
 ASAN_OPTIONS=verbosity=3,abort_on_error=1 afl-fuzz -m none -i in/ -o out/ fuzz/fuzz_sconf_yaml_read
 ```
-
-## Example
-
-See `examples/minimal.c` for an example showing off the basics of simpleconfig.
-
-## API
-
-Check out the header file (`include/sconf.h`).
