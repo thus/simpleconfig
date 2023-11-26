@@ -48,7 +48,7 @@ static int sconf_short_opts_index_create(const struct SConfMap *map,
         }
 
         if (entry->opts_short < 0) {
-            sconf_err_set(err, "short option '%s' is a negative number",
+            sconf_err_set(err, "short option '%c' is a negative number",
                           entry->opts_short);
             return -1;
         }
