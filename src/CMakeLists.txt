@@ -13,7 +13,7 @@ set(simpleconfig_source
     yaml.c
 )
 
-set(sconf_compile_options -Wall -Wextra)
+set(simpleconfig_compile_options -Wall -Wextra)
 
 if (SCONF_BUILD_SHARED)
     add_library(sconf SHARED ${simpleconfig_source})
