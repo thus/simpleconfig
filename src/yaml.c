@@ -178,6 +178,8 @@ static int sconf_yaml_parent_add(struct SConfYAMLState *state, uint8_t type,
  *
  * @return 0 on success, -1 otherwise.
  */
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-parameter"
 static int sconf_yaml_parent_remove(struct SConfYAMLState *state, uint8_t type,
                                     struct SConfErr *err)
 {
@@ -196,6 +198,7 @@ static int sconf_yaml_parent_remove(struct SConfYAMLState *state, uint8_t type,
 
     return 0;
 }
+#pragma GCC diagnostic pop
 
 /**
  * @internal
