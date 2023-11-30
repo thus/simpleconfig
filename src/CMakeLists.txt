@@ -15,6 +15,8 @@ set(simpleconfig_source
 
 set(simpleconfig_compile_options -Wall -Wextra)
 
+find_package(yaml REQUIRED)
+
 if (SCONF_BUILD_SHARED)
     add_library(sconf SHARED ${simpleconfig_source})
     target_include_directories(sconf PUBLIC "${simpleconfig_SOURCE_DIR}/include")
