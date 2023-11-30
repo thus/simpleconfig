@@ -1,0 +1,9 @@
+[requires]
+libyaml/0.2.5
+
+[tool_requires]
+cmake/3.25.3
+
+[generators]
+CMakeDeps
+CMakeToolchain

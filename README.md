@@ -23,13 +23,30 @@ libyaml is needed to build simpleconfig.
 
 ## Build
 
-Simpleconfig is built like most other cmake projects:
+### Build using vanilla CMake
+
+Simpleconfig can be built like most other cmake projects:
 
 ```
 mkdir build && cd build
 cmake ..
 make
 make install
+```
+
+### Build using Conan Package Manager
+
+It's also possible to build simpleconfig using Conan:
+
+```
+conan profile detect
+conan install . --output-folder build --build=missing
+cd build
+source conanbuild.sh
+cmake --preset conan-release ..
+make
+make install
+source deactivate_conanbuild.sh
 ```
 
 ## Example
