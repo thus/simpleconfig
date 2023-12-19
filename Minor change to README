@@ -10,7 +10,7 @@ Simpleconfig supports the following:
 
 * Basic node types like string, integer, float and boolean.
 * Nested nodes using dictionaries and arrays.
-* "Get" and "set" functions for the various types.
+* "get" and "set" functions for the various types.
 * Iterators to traverse through nodes in dictionaries and arrays.
 * Config map to define command-line options, environment variables,
   default values, validation callback functions, etc.
