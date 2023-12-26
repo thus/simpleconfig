@@ -24,8 +24,8 @@ jobs:
 
       - name: Install Cppcheck
         run: |
-          apt-get update
-          apt-get install -y --no-install-recommends cppcheck
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends cppcheck
 
       - name: Run Cppcheck
         run: cppcheck --error-exitcode=1 src/*.c
