@@ -1,0 +1,47 @@
+name: ubuntu
+
+on:
+  push:
+  pull_request:
+    types:
+      - opened
+
+permissions:
+  contents: read
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+  TZ: Europe/Oslo
+
+jobs:
+  ubuntu:
+    strategy:
+      matrix:
+        release: ["22.04"]
+        compiler: ["gcc", "clang"]
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:${{ matrix.release }}
+    env:
+      CC: ${{ matrix.compiler }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          apt update
+          apt install -y --no-install-recommends clang build-essential cmake \
+                      libyaml-dev libcmocka-dev
+
+      - name: Run CMake
+        run: |
+          mkdir build && cd build
+          cmake -DSCONF_BUILD_EXAMPLES=on \
+                -DSCONF_ENABLE_TESTS=on -DSCONF_ENABLE_ASAN=on ..
+
+      - name: Build code
+        run: cmake --build build
+
+      - name: Run tests
+        run: cmake --build build --target test
