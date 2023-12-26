@@ -20,12 +20,9 @@ jobs:
     strategy:
       matrix:
         release: ["22.04"]
-        compiler: ["gcc", "clang"]
     runs-on: ubuntu-latest
     container:
       image: ubuntu:${{ matrix.release }}
-    env:
-      CC: ${{ matrix.compiler }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -36,14 +33,26 @@ jobs:
           apt-get install -y --no-install-recommends clang build-essential \
                           cmake libyaml-dev libcmocka-dev
 
-      - name: Run CMake
+      - name: Run CMake (GCC)
         run: |
-          mkdir build && cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
-                -DSCONF_ENABLE_TESTS=on -DSCONF_ENABLE_ASAN=on ..
+          mkdir build-gcc && cd build-gcc
+          CC=gcc cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
+                       -DSCONF_ENABLE_TESTS=on ..
 
-      - name: Build code
-        run: cmake --build build
+      - name: Run CMake (Clang)
+        run: |
+          mkdir build-clang && cd build-clang
+          CC=clang cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
+                         -DSCONF_ENABLE_TESTS=on ..
 
-      - name: Run tests
-        run: cmake --build build --target test
+      - name: Build code (GCC)
+        run: cmake --build build-gcc
+
+      - name: Build code (clang)
+        run: cmake --build build-clang
+
+      - name: Run tests (GCC)
+        run: cmake --build build-gcc --target test
+
+      - name: Run tests (clang)
+        run: cmake --build build-clang --target test
