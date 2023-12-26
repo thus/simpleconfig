@@ -7,7 +7,7 @@ project(
   LANGUAGES C
 )
 
-set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD 11)
 
 list(APPEND CMAKE_MODULE_PATH "${simpleconfig_SOURCE_DIR}/cmake")
 
