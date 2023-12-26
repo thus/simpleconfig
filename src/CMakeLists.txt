@@ -13,7 +13,11 @@ set(simpleconfig_source
     yaml.c
 )
 
-set(simpleconfig_compile_options -Wall -Wextra)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(simpleconfig_compile_options -Wall -Wextra -Werror)
+else()
+    set(simpleconfig_compile_options -Wall -Wextra)
+endif()
 
 find_package(yaml REQUIRED)
 
