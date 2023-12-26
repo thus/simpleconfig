@@ -39,7 +39,7 @@ jobs:
       - name: Run CMake
         run: |
           mkdir build && cd build
-          cmake -DSCONF_BUILD_EXAMPLES=on \
+          cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
                 -DSCONF_ENABLE_TESTS=on -DSCONF_ENABLE_ASAN=on ..
 
       - name: Build code
