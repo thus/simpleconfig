@@ -1,0 +1,31 @@
+name: Cppcheck
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+
+permissions:
+  contents: read
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+  TZ: Europe/Oslo
+
+jobs:
+  cppcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Cppcheck
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends cppcheck
+
+      - name: Run Cppcheck
+        run: cppcheck --error-exitcode=1 src/*.c
