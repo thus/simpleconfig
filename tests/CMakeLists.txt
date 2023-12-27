@@ -24,7 +24,7 @@ set(SCONF_TESTS
 
 foreach(X IN LISTS SCONF_TESTS)
     add_executable(${X} ${X}.c)
-    target_compile_options(${X} PRIVATE -Wall)
+    target_compile_options(${X} PRIVATE -Wall -Wno-missing-field-initializers -Wno-missing-braces)
     target_link_libraries(${X} sconf ${CMOCKA_LIB})
     add_test(NAME ${X} COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${X}
              WORKING_DIRECTORY ${simpleconfig_SOURCE_DIR}/tests
