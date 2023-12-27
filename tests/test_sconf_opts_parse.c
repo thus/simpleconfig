@@ -7,6 +7,7 @@
 
 #include <cmocka.h>
 
+#include "sconf_tests.h"
 #include "sconf.h"
 
 void my_usage_callback(const char *usage, void *user)

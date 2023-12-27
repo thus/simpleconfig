@@ -7,6 +7,7 @@
 
 #include <cmocka.h>
 
+#include "sconf_tests.h"
 #include "sconf.h"
 
 static void test_sconf_set_and_get_float(void **unused)
