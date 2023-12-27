@@ -7,6 +7,7 @@
 
 #include <cmocka.h>
 
+#include "sconf_tests.h"
 #include "sconf.h"
 
 static void test_valid_yaml_string(void **unused)

@@ -7,6 +7,7 @@
 
 #include <cmocka.h>
 
+#include "sconf_tests.h"
 #include "sconf.h"
 
 static struct SConfMap default_map[] = {

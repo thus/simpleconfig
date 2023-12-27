@@ -8,6 +8,7 @@
 
 #include <cmocka.h>
 
+#include "sconf_tests.h"
 #include "sconf.h"
 
 static void test_sconf_env_read_string(void **unused)
