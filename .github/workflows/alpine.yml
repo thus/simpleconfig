@@ -1,0 +1,39 @@
+name: Alpine
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  contents: read
+
+jobs:
+  alpine:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:edge
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          apk update
+          apk add build-base cmake cmocka-dev yaml-dev
+
+      - name: Run CMake
+        run: |
+          mkdir build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
+                -DSCONF_ENABLE_TESTS=on ..
+
+      - name: Build code
+        run: cmake --build build
+
+      - name: Run tests
+        run: cmake --build build --target test
