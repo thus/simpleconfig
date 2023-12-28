@@ -1,0 +1,41 @@
+name: Code Analysis
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+
+permissions:
+  contents: read
+
+env:
+  DEBIAN_FRONTEND: noninteractive
+  TZ: Europe/Oslo
+
+jobs:
+  code_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends build-essential cmake \
+                          libyaml-dev cppcheck clang-tidy
+
+      - name: Run CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -DSCONF_ENABLE_CLANG_TIDY=on
+
+      - name: Build code
+        run: cmake --build build
+
+      - name: Run Clang-Tidy
+        run: cmake --build build --target check-clang-tidy
+
+      - name: Run Cppcheck
+        run: cmake --build build --target check-cppcheck
