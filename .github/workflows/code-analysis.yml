@@ -29,7 +29,9 @@ jobs:
                                cmake libyaml-dev cppcheck clang-tidy
 
       - name: Run CMake
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Debug -DSCONF_ENABLE_CLANG_TIDY=on
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Debug -DSCONF_ENABLE_CLANG_TIDY=on \
+                -DSCONF_ENABLE_CPPCHECK=on
 
       - name: Build code
         run: cmake --build build
