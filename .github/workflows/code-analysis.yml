@@ -32,7 +32,7 @@ jobs:
       - name: Run CMake
         run: |
           cmake -B build -DCMAKE_BUILD_TYPE=Debug -DSCONF_ENABLE_CLANG_TIDY=on \
-                -DSCONF_ENABLE_CPPCHECK=on
+                -DSCONF_ENABLE_CPPCHECK=on -Werror=dev
 
       - name: Build code
         run: cmake --build build
