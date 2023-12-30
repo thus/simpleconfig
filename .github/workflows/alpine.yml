@@ -30,7 +30,7 @@ jobs:
         run: |
           mkdir build && cd build
           cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
-                -DSCONF_ENABLE_TESTS=on ..
+                -DSCONF_ENABLE_TESTS=on -Werror=dev ..
 
       - name: Build code
         run: cmake --build build

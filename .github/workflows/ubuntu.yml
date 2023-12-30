@@ -38,13 +38,13 @@ jobs:
         run: |
           mkdir build-gcc && cd build-gcc
           CC=gcc cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
-                       -DSCONF_ENABLE_TESTS=on ..
+                       -DSCONF_ENABLE_TESTS=on -Werror=dev ..
 
       - name: Run CMake (Clang)
         run: |
           mkdir build-clang && cd build-clang
           CC=clang cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
-                         -DSCONF_ENABLE_TESTS=on ..
+                         -DSCONF_ENABLE_TESTS=on -Werror=dev ..
 
       - name: Build code (GCC)
         run: cmake --build build-gcc

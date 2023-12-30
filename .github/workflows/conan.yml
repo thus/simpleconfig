@@ -31,7 +31,7 @@ jobs:
           cd build
           source conanbuild.sh
           cmake -DSCONF_BUILD_EXAMPLES=on -DSCONF_ENABLE_TESTS=on \
-                --preset conan-release ..
+                --preset conan-release -Werror=dev ..
           make
           make test
           source deactivate_conanbuild.sh
