@@ -4,6 +4,9 @@ libyaml/0.2.5
 [tool_requires]
 cmake/3.25.3
 
+[test_requires]
+cmocka/1.1.5
+
 [generators]
 CMakeDeps
 CMakeToolchain
