@@ -1,0 +1,37 @@
+name: Conan
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  contents: read
+
+jobs:
+  conan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Conan
+        run: pip install conan
+
+      - name: Generate a Conan profile
+        run: conan profile detect
+
+      - name: Build using Conan
+        run: |
+          conan install . --output-folder=build --build=missing
+          cd build
+          source conanbuild.sh
+          cmake -DSCONF_BUILD_EXAMPLES=on -DSCONF_ENABLE_TESTS=on \
+                --preset conan-release ..
+          make
+          make test
+          source deactivate_conanbuild.sh
