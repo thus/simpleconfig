@@ -1,5 +1,3 @@
-find_library(CMOCKA_LIB cmocka)
-
 # Add tests to this list
 set(SCONF_TESTS
     test_sconf_yaml_read
@@ -22,10 +20,13 @@ set(SCONF_TESTS
     test_sconf_initialize
 )
 
+find_package(cmocka REQUIRED)
+
 foreach(X IN LISTS SCONF_TESTS)
     add_executable(${X} ${X}.c)
     target_compile_options(${X} PRIVATE -Wall -Wno-missing-field-initializers -Wno-missing-braces)
-    target_link_libraries(${X} sconf ${CMOCKA_LIB})
+    target_link_libraries(${X} sconf)
+    target_link_libraries(${X} cmocka::cmocka)
     add_test(NAME ${X} COMMAND ${CMAKE_CURRENT_BINARY_DIR}/${X}
              WORKING_DIRECTORY ${simpleconfig_SOURCE_DIR}/tests
     )
