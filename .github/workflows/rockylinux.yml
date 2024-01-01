@@ -1,0 +1,59 @@
+name: Rocky Linux
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types:
+      - opened
+      - reopened
+
+permissions:
+  contents: read
+
+jobs:
+  rockylinux:
+    strategy:
+      matrix:
+        release: ["8", "9"]
+    runs-on: ubuntu-latest
+    container:
+      image: rockylinux:${{ matrix.release }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Configure devel repository
+        run: |
+          echo "fastestmirror=true" >> /etc/dnf/dnf.conf
+          dnf install -y dnf-plugins-core
+          dnf config-manager --set-enabled devel
+
+      - name: Install dependencies
+        run: |
+          dnf install -y gcc clang cmake libyaml-devel libcmocka-devel
+
+      - name: Run CMake (GCC)
+        run: |
+          mkdir build-gcc && cd build-gcc
+          CC=gcc cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
+                       -DSCONF_ENABLE_TESTS=on -Werror=dev ..
+
+      - name: Run CMake (Clang)
+        run: |
+          mkdir build-clang && cd build-clang
+          CC=clang cmake -DCMAKE_BUILD_TYPE=Debug -DSCONF_BUILD_EXAMPLES=on \
+                         -DSCONF_ENABLE_TESTS=on -Werror=dev ..
+
+      - name: Build code (GCC)
+        run: cmake --build build-gcc
+
+      - name: Build code (clang)
+        run: cmake --build build-clang
+
+      - name: Run tests (GCC)
+        run: cmake --build build-gcc --target test
+
+      - name: Run tests (clang)
+        run: cmake --build build-clang --target test
